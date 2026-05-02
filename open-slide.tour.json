@@ -1,0 +1,284 @@
+{
+  "id": "open-slide-onboarding",
+  "title": "open-slide Codebase Tour",
+  "description": "Guided walkthrough of the open-slide monorepo — the agent-native slide framework. Covers the core runtime, scaffolder CLI, demo deck, marketing site, and the agent skills that drive authoring.",
+  "version": "1.0.0",
+  "audience": "New Contributors",
+  "prerequisites": [
+    "Familiarity with TypeScript and React",
+    "Basic understanding of pnpm workspaces"
+  ],
+  "steps": [
+    {
+      "id": "step-1-overview",
+      "title": "Welcome to open-slide",
+      "description": "open-slide is a slide framework built for coding agents. You describe a deck in natural language and your agent writes the React. The repo is a small monorepo with two publishable libraries and two consumer apps. Let's tour the layout.",
+      "focusDirectory": "",
+      "estimatedTime": 60,
+      "colorMode": "fileTypes"
+    },
+    {
+      "id": "step-2-monorepo-shape",
+      "title": "Monorepo Shape",
+      "description": "Two top-level workspaces. One holds the publishable libraries — the runtime and the scaffolder. The other holds the consumers — a demo deck used for framework development and a separate marketing site. Workspace wiring and the build pipeline configuration sit at the root.",
+      "focusDirectory": "",
+      "estimatedTime": 90,
+      "highlightLayers": [
+        {
+          "id": "packages-layer",
+          "name": "Publishable Packages",
+          "color": "#3b82f6",
+          "items": [
+            { "path": "packages", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        },
+        {
+          "id": "apps-layer",
+          "name": "Consumer Apps",
+          "color": "#10b981",
+          "items": [
+            { "path": "apps", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        },
+        {
+          "id": "workspace-config",
+          "name": "Workspace Config",
+          "color": "#f59e0b",
+          "items": [
+            { "path": "pnpm-workspace.yaml", "type": "file" },
+            { "path": "turbo.json", "type": "file" },
+            { "path": "package.json", "type": "file" }
+          ],
+          "opacity": 0.8,
+          "renderStrategy": "border"
+        }
+      ],
+      "colorMode": "fileTypes"
+    },
+    {
+      "id": "step-3-core-runtime",
+      "title": "@open-slide/core — the runtime",
+      "description": "The framework itself. The runtime ships the home page, slide viewer, present mode, and the in-browser inspector, alongside the build plugins that power hot reload, comment markers, and design tokens. The dev, build, and preview commands also live in this package.",
+      "focusDirectory": "packages/core",
+      "estimatedTime": 120,
+      "highlightLayers": [
+        {
+          "id": "app-runtime",
+          "name": "Runtime UI (viewer, present, inspector)",
+          "color": "#8b5cf6",
+          "items": [
+            { "path": "packages/core/src/app", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        },
+        {
+          "id": "vite-plugins",
+          "name": "Vite Plugins",
+          "color": "#06b6d4",
+          "items": [
+            { "path": "packages/core/src/vite", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        },
+        {
+          "id": "core-cli",
+          "name": "Dev/Build/Preview CLI",
+          "color": "#ec4899",
+          "items": [
+            { "path": "packages/core/src/cli", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        }
+      ],
+      "colorMode": "fileTypes"
+    },
+    {
+      "id": "step-4-cli-scaffolder",
+      "title": "@open-slide/cli — the scaffolder",
+      "description": "A single init command creates a fresh workspace. This package keeps the build, React, and TypeScript wiring hidden inside the runtime, so the generated project stays minimal. The starter copied into each new workspace lives alongside the scaffolder source.",
+      "focusDirectory": "packages/cli",
+      "estimatedTime": 90,
+      "highlightLayers": [
+        {
+          "id": "cli-source",
+          "name": "Scaffolder Source",
+          "color": "#3b82f6",
+          "items": [
+            { "path": "packages/cli/src", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        },
+        {
+          "id": "cli-template",
+          "name": "Project Template",
+          "color": "#f59e0b",
+          "items": [
+            { "path": "packages/cli/template", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        }
+      ],
+      "colorMode": "fileTypes"
+    },
+    {
+      "id": "step-5-agent-skills",
+      "title": "Agent skills — the brains",
+      "description": "Skills are the markdown playbooks coding agents read before writing. One drafts a new deck end to end. Another is the canvas, type, and layout reference. A third applies inspector comments back into source. The last one extracts a reusable theme from an existing design.",
+      "focusDirectory": "packages/core/skills",
+      "estimatedTime": 90,
+      "highlightLayers": [
+        {
+          "id": "skills-set",
+          "name": "Agent Skills",
+          "color": "#a855f7",
+          "items": [
+            { "path": "packages/core/skills/create-slide", "type": "directory" },
+            { "path": "packages/core/skills/slide-authoring", "type": "directory" },
+            { "path": "packages/core/skills/apply-comments", "type": "directory" },
+            { "path": "packages/core/skills/create-theme", "type": "directory" }
+          ],
+          "opacity": 0.75,
+          "renderStrategy": "border"
+        }
+      ],
+      "colorMode": "fileTypes"
+    },
+    {
+      "id": "step-6-demo-deck",
+      "title": "apps/demo — the dogfood deck",
+      "description": "An example workspace that consumes the runtime through a local workspace link. It's how the framework gets exercised during development. Each deck sits in its own subdirectory with a single entry component and a folder for images, video, and fonts.",
+      "focusDirectory": "apps/demo",
+      "estimatedTime": 90,
+      "highlightLayers": [
+        {
+          "id": "demo-slides",
+          "name": "Example Decks",
+          "color": "#10b981",
+          "items": [
+            { "path": "apps/demo/slides", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        },
+        {
+          "id": "demo-themes",
+          "name": "Themes",
+          "color": "#ec4899",
+          "items": [
+            { "path": "apps/demo/themes", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        },
+        {
+          "id": "demo-config",
+          "name": "Deck Config",
+          "color": "#f59e0b",
+          "items": [
+            { "path": "apps/demo/open-slide.config.ts", "type": "file" }
+          ],
+          "opacity": 0.85,
+          "renderStrategy": "border"
+        }
+      ],
+      "colorMode": "fileTypes"
+    },
+    {
+      "id": "step-7-web-app",
+      "title": "apps/web — the marketing site",
+      "description": "A Next.js app for the landing page and docs. Separate from the runtime — it doesn't ship with the published packages, it just promotes them.",
+      "focusDirectory": "apps/web",
+      "estimatedTime": 60,
+      "highlightLayers": [
+        {
+          "id": "web-app",
+          "name": "Next.js Site",
+          "color": "#06b6d4",
+          "items": [
+            { "path": "apps/web/app", "type": "directory" },
+            { "path": "apps/web/public", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        }
+      ],
+      "colorMode": "fileTypes"
+    },
+    {
+      "id": "step-8-tooling",
+      "title": "Tooling & quality gates",
+      "description": "Biome handles lint and format in one tool. Vitest runs unit tests for the build plugins and CLI helpers. Changesets manages versioning and the release pipeline. A short hard-rules guide sits at the root for agents working inside a generated workspace.",
+      "focusDirectory": "",
+      "estimatedTime": 60,
+      "highlightLayers": [
+        {
+          "id": "tooling-files",
+          "name": "Tooling",
+          "color": "#f97316",
+          "items": [
+            { "path": "biome.json", "type": "file" },
+            { "path": "vitest.config.ts", "type": "file" },
+            { "path": ".changeset", "type": "directory" },
+            { "path": ".github", "type": "directory" }
+          ],
+          "opacity": 0.8,
+          "renderStrategy": "border"
+        },
+        {
+          "id": "agent-docs",
+          "name": "Agent Guides",
+          "color": "#a855f7",
+          "items": [
+            { "path": "CLAUDE.md", "type": "file" },
+            { "path": "README.md", "type": "file" }
+          ],
+          "opacity": 0.85,
+          "renderStrategy": "border"
+        }
+      ],
+      "colorMode": "fileTypes"
+    },
+    {
+      "id": "step-9-recent-activity",
+      "title": "Recent activity",
+      "description": "The view is now coloured by recent git activity. Files touched recently stand out, which is a quick way to see where active work is happening before you pick up an issue or open a pull request.",
+      "focusDirectory": "",
+      "estimatedTime": 60,
+      "colorMode": "git"
+    },
+    {
+      "id": "step-10-next-steps",
+      "title": "Next steps",
+      "description": "Install dependencies and start the dev server to run the demo against the local runtime. The agent guide at the root spells out the slide-authoring rules. When you're ready, the scaffolder will spin up a fresh workspace for your own deck. Welcome aboard.",
+      "focusDirectory": "",
+      "estimatedTime": 60,
+      "colorMode": "fileTypes",
+      "resources": [
+        {
+          "title": "open-slide README",
+          "url": "https://github.com/1weiho/open-slide",
+          "type": "documentation"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "author": "open-slide tour",
+    "createdAt": "2026-05-02T00:00:00.000Z",
+    "tags": [
+      "onboarding",
+      "monorepo",
+      "agent-native",
+      "slides"
+    ]
+  }
+}
